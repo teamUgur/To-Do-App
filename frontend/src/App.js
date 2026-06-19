@@ -63,21 +63,45 @@ function App() {
     }
   }
 
+  const startEdit = (item) => {
+    setEditingId(item.id);
+    setName(item.name);
+    setDescription(item.description);
+  }
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setName('');
+    setDescription('');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>CRUD APP with FastAPI and React</h1>
+      <div className="item-form">
+        <input
+          type="text"
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        {editingId ? 
+          (
+          <>
+            <button onclick={editItem}>Edit Item</button>
+            <button onclick={deleteItem}>Cancel</button>
+          </>
+        ) : (
+          <button onclick={createItem}>Create Item</button>
+        )
+        }
+      </div>
     </div>
   );
 }
