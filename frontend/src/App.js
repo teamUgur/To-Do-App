@@ -41,10 +41,10 @@ function App() {
 
   const editItem = async () => {
     try {
-      const response = await axios.put(`${API_BASE}/items/${editingId}`,
+      const response = await axios.put(`${API_BASE}/items/${editingId}`, {
         name,
         description
-      );
+      });
       setItems(items.map(item => item.id === editingId ? response.data : item));
       setEditingId(null);
       setName('');
@@ -84,13 +84,13 @@ function App() {
           type="text"
           placeholder="name"
           value={name}
-          onChange={(e) => e.target.value}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           placeholder="description"
           value={description}
-          pnChange={(e) => e.target.value}
+          pnChange={(e) => setDescription(e.target.value)}
         />
         {editingId ? (
           <>
