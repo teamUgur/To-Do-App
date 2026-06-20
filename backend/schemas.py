@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, ConfigDict
 
 # default state
 class ItemBase(BaseModel):
     name: str
-    description: str = None
+    description: Optional[str] = None
 
 # for creating new items
 class CreateItem(ItemBase):
@@ -13,5 +14,4 @@ class CreateItem(ItemBase):
 class Item(ItemBase):
     id: int
 
-    def Config():
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
