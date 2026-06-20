@@ -56,7 +56,7 @@ function App() {
 
   const deleteItem = async (id) => {
     try {
-      const response = await axios.delete(`${API_BASE}/items/${id}`);
+      await axios.delete(`${API_BASE}/items/${id}`);
       setItems(items.filter(item => item.id !== id));
     } catch (error) {
       console.error("Error deleting items", error);
