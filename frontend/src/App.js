@@ -79,28 +79,46 @@ function App() {
     <div className="App">
       <h1>CRUD APP with FastAPI and React</h1>
       <div className="item-form">
+        <h2>{editingId ? 'Edit Item' : 'Create new Item'}</h2>
         <input
           type="text"
           placeholder="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => e.target.value}
         />
         <input
           type="text"
           placeholder="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          pnChange={(e) => e.target.value}
         />
-        {editingId ? 
-          (
+        {editingId ? (
           <>
-            <button onclick={editItem}>Edit Item</button>
-            <button onclick={deleteItem}>Cancel</button>
+            <button onClick={editItem}>Edit Item</button>
+            <button onClick={cancelEdit}>Cancel</button>
           </>
         ) : (
-          <button onclick={createItem}>Create Item</button>
-        )
-        }
+          <button onClick={createItem}>Create Item</button>
+        )}
+      </div>
+
+      <div className="items-list">
+        <h2>Items</h2>
+        {
+          items.length === 0 ? (
+            <p>No item yet</p>
+          ) : (
+            <ul>
+              {items.map(item => (
+                <li key={item.id}>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <button onClick={() => startEdit(item)}>Edit</button>
+                  <button onClicn={() => deleteItem(item.id)}>Delete</button>
+                </li>
+              ))}
+            </ul>
+          )}
       </div>
     </div>
   );
