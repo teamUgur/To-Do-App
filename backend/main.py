@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
-from database import engine, LocalSession
+from database import engine
+from dependency import db_dependency
 import models, schemas
 
 models.Base.metadata.create_all(bind=engine)
@@ -16,13 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
-def get_db():
-    db = LocalSession()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @app.post('/items/', response_model=schemas.Item)
 def create_item(item: schemas.CreateItem, db: Session = Depends(get_db)):
