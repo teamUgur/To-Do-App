@@ -90,7 +90,7 @@ function App() {
           type="text"
           placeholder="description"
           value={description}
-          pnChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
         {editingId ? (
           <>
@@ -114,7 +114,7 @@ function App() {
                   <h3>{item.name}</h3>
                   <p>{item.description}</p>
                   <button onClick={() => startEdit(item)}>Edit</button>
-                  <button onClicn={() => deleteItem(item.id)}>Delete</button>
+                  <button onClick={() => deleteItem(item.id)}>Delete</button>
                 </li>
               ))}
             </ul>
