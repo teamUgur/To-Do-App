@@ -15,5 +15,5 @@ class Item(Base):
     name: Mapped[str] = mapped_column(index=True)
     description: Mapped[str | None] = mapped_column(index=True, default=None)
 
-    owner_id: Mapped[int] = mapped_column(FoeignKey("users.id"))
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     
